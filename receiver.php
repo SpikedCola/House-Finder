@@ -1,5 +1,7 @@
 <?php
-        if (!empty($_POST)) {
+        if (array_key_exists('location', $_POST) && !empty($_POST['location'])) {
+                $location = $_POST['location'];
+                
                 $response = array(
                     'status' => 'error',
                     'results' => array()

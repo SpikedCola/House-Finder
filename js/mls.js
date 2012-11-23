@@ -7,9 +7,10 @@ function doSearch() {
         $.ajax({
                 url: 'receiver.php',
                 type: 'post',
+                dataType: 'json',
                 data: { location: bounds.toUrlValue(10) }, // thanks google!
                 success: function(data) {
-                        if (data.status && data.status == 'ok') {
+                        if (data.status && data.status === 'ok') {
                                 console.log('win!');
                         }
                         else {
