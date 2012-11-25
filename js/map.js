@@ -4,7 +4,9 @@ function initialize() {
         var mapOptions = {
                 center: new google.maps.LatLng(43.56, -79.67),
                 zoom: 12,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+		streetViewControl: false, // disable street view
+		mapTypeControl: false // disable satellite view
         };
 
         map = new google.maps.Map(document.getElementById("map-container"), mapOptions);
