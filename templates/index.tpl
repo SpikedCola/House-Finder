@@ -7,7 +7,7 @@
                 <link href="css/ui-lightness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
                 <script src="js/map.js"></script>
                 <script src="js/main.js"></script>
-                <script src="js/mls.js"></script>
+                <script src="js/ajax.js"></script>
         </head> 
         <body>
                 <div id="map-container"></div>

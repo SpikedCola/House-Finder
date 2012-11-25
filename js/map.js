@@ -1,4 +1,4 @@
-var map, rectangle;
+var map, rectangle, dragging;
 
 function initialize() {
         var mapOptions = {
@@ -22,44 +22,67 @@ function initialize() {
                 map: map
         });
         
-        marker = new google.maps.Marker({ 
+	// this marker will be the center of the rectangle
+        var centerMarker = new google.maps.Marker({ 
                 map: map, 
-                position: rectangle.getBounds().getCenter(), // initially place the marker at the center of the rectangle
+                position: rectangle.getBounds().getCenter(),
                 draggable: true, 
                 raiseOnDrag:false
         });
         
-        marker.setAnimation(null);
+        centerMarker.setAnimation(null);
 
-        // we need to give the map an initial 'center', but let's
+        // we gave the map an initial position, but let's
         // move the map to be centered on the marker. there's 
         // probably a better way to do this
         map.setCenter(rectangle.getBounds().getCenter());
         
-        // when we drag the marker, move the rectangle to the center of the new position
-        google.maps.event.addListener(marker, 'drag', function(event) {
+	// we need to differentiate between bounds_changed when we are dragging
+	// (automatically resizing the rectangle) vs the user changing the bounds
+	// and thus wanting to doSearch. flag in dragstart and dragend
+	// so we know when we're dragging
+	
+        // when we drag the marker, center the rectangle on the new position
+        google.maps.event.addListener(centerMarker, 'dragstart', function(event) {
+		dragging = true;
+        });
+
+        // when we drag the marker, center the rectangle on the new position
+        google.maps.event.addListener(centerMarker, 'drag', function(event) {
                 rectangle.setCenter(event.latLng);
+        });
+
+        // when we stop dragging the marker, get new search results
+        google.maps.event.addListener(centerMarker, 'dragend', function() {
+		doSearch();
+		dragging = false; // flag after searching so we dont search twice
         });
 
         // when we resize the rectangle, update the position of the marker
         google.maps.event.addListener(rectangle, 'bounds_changed', function() {;
-                marker.setPosition(rectangle.getBounds().getCenter());
+                centerMarker.setPosition(rectangle.getBounds().getCenter());
+		if (!dragging) {
+			doSearch(); // only search if we're not dragging
+		}
         });
 
         // one-time trigger to get search results on page load
         google.maps.event.addListenerOnce(map, 'idle', doSearch);
 }
-     
+
+// this function will center a rectangle on the given latLng.
+// *should* take the size of the rectangle into account
 google.maps.Rectangle.prototype.setCenter = function(latLng) {
         var lat = latLng.lat();
         var lng = latLng.lng();
 
+	// need to know the size of our rectangle
         var sw = this.getBounds().getSouthWest();
         var ne = this.getBounds().getNorthEast();
-        
         var width = ne.lng() - sw.lng();
         var height = ne.lat() - sw.lat();
         
+	// create the new bounds of the rectangle
         var bounds = new google.maps.LatLngBounds(
                 new google.maps.LatLng(lat - height/2.0, lng - width/2.0),
                 new google.maps.LatLng(lat + height/2.0, lng + width/2.0)
