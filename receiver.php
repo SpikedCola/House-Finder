@@ -30,7 +30,6 @@
 		$dom->preserveWhiteSpace = false; 
 		$dom->formatOutput = false; 
 		$dom->loadXML($xml->asXML()); 
-		
 		$xmlString = $dom->saveXML();
 		
                 $url = 'http://www.realtor.ca/handlers/MapSearchHandler.ashx?xml=' . urlencode($xmlString);
@@ -47,9 +46,10 @@
 				if ($json->NumberSearchResults > 0 && isset($json->MapSearchResults)) {
 					// data is probably valid :)
 					$response['status'] = 'ok';
-					$response['results'] = $json->MapSearchResults;
+					$response['results'] = processResults($json->MapSearchResults);
 				}
-				else if ($json->NumberSearchResults >= 500 && !isset($json->MapSearchResults)) {
+				else if ($json->NumberSearchResults > 0 && !isset($json->MapSearchResults)) {
+                                        // when we have a count but no results, MLS is saying "too many"
 					$response['status'] = 'toomany';
 				}
 				else if ($json->NumberSearchResults == 0) {
@@ -72,6 +72,69 @@
         
         header("HTTP/1.1 403 Forbidden");
 	
+        function processResults($results) {
+                $ret = array();
+                
+                foreach ($results as $result) {
+                        $imageUrl = str_replace('lowres', 'highres', $result->PropertyLowResImagePath);
+
+                        $listing = array(
+                            'bedrooms' => array(
+                                'above' => 0,
+                                'below' => 0,
+                                'total' => 0
+                            )
+                        );
+                        
+                        foreach ($result as $key => $value) {
+                                switch ($key) {
+                                        case 'MLS':
+                                                $listing['id'] = $value;
+                                                break;
+                                        case 'LeaseRent':
+                                                $listing['price'] = $value;
+                                                break;
+                                        case 'LeaseRentPerTime':
+                                                $listing['frequency'] = strtolower($value);
+                                                break;
+                                        case 'Address':
+                                                $listing['address'] = ucwords(strtolower($value));
+                                                break;
+                                        case 'BedroomsAboveGround':
+                                                if (is_numeric($value)) {
+                                                        $listing['bedrooms']['above'] = $value;
+                                                }
+                                                break;
+                                        case 'BedroomsBelowGround':
+                                                if (is_numeric($value)) {
+                                                        $listing['bedrooms']['below'] = $value;
+                                                }
+                                                break;
+                                        case 'PropertyLowResPhotos':
+                                                $photos = array();
+
+                                                // to make life easier, store the whole URL
+                                                foreach ($value as $p) {
+                                                        $photos[] = $imageUrl . $p;
+                                                }
+
+                                                $listing['photos'] = $photos;
+                                                break;
+                                        default: 
+                                                break;
+                                }
+                        }
+        
+                        $listing['bedrooms']['total'] = $listing['bedrooms']['above'] + $listing['bedrooms']['below'];
+                        
+                        ksort($listing); // for consistency
+                        
+                        $ret[] = $listing;
+                }
+                
+                return $ret;
+        }
+        
 	/**
 	 * GET a url
 	 * 
