@@ -10,14 +10,30 @@ function doSearch() {
                 dataType: 'json',
                 data: { location: bounds.toUrlValue(10) }, // thanks google!
                 success: function(data) {
-                        if (data.status && data.status === 'ok') {
-				processListings(data);
+			clearMarkers();
+			
+                        if (data.status) {
+				switch (data.status) {
+					case 'ok':
+						processListings(data);
+						break;
+					case 'none':
+						showNoResults();
+						break;
+					case 'toomany':
+						showTooMany();
+						break;
+					default: 
+						showError();
+						break;
+				}
                         }
                         else {
                                 showError();
                         }
                 },
                 error: function() {
+			clearMarkers();
                         showError();     
                 }
         });
@@ -28,6 +44,22 @@ function showError() {
         alert('An error occured while trying to get MLS listings. Please try again later.');
 }
 
+function showTooMany() {
+	alert('Too many results were returned for the given search area. Please reduce the size of the search area and try again.');
+}
+
+function showNoResults() {
+	alert('No results were found in the given search area.');
+}
+
+function clearMarkers() {
+	for (var i in markers) {
+		markers[i].setMap(null); // clear from map
+	}
+	
+	markers = []; // reset array
+}
+
 // process the listings we receive from our API. this should handle
 // the condition of no listings returned. the 'delay' variable sets 
 // the delay between showing pins on the map
@@ -35,12 +67,6 @@ var markers = [];
 var delay = 25;
 
 function processListings(data) {
-	for (var i in markers) {
-		markers[i].setMap(null); // clear from map
-	}
-	
-	markers = []; // reset array
-
 	if (data.results.length > 0) {
 		var results = data.results;
 		
