@@ -1,13 +1,6 @@
 <html>
         <head>
-                <script src="js/jquery-1.8.3.min.js"></script>
-                <script src="js/jquery-ui-1.9.2.custom.min.js"></script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIeGZ0goJKoy7ixt2ARwaGt6VBJyUXY1I&sensor=false"></script>
-                <link href="css/main.css" rel="stylesheet">
-                <link href="css/ui-lightness/jquery-ui-1.9.2.custom.min.css" rel="stylesheet">
-                <script src="js/map.js"></script>
-                <script src="js/main.js"></script>
-                <script src="js/ajax.js"></script>
+                {include file="head.tpl"}
         </head> 
         <body>
                 <div id="map-container"></div>

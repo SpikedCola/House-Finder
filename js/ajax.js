@@ -39,27 +39,6 @@ function doSearch() {
         });
 }
 
-// so we dont have duplicate code
-function showError() {
-        alert('An error occured while trying to get MLS listings. Please try again later.');
-}
-
-function showTooMany() {
-	alert('Too many results were returned for the given search area. Please reduce the size of the search area and try again.');
-}
-
-function showNoResults() {
-	alert('No results were found in the given search area.');
-}
-
-function clearMarkers() {
-	for (var i in markers) {
-		markers[i].setMap(null); // clear from map
-	}
-	
-	markers = []; // reset array
-}
-
 // process the listings we receive from our API. this should handle
 // the condition of no listings returned. the 'delay' variable sets 
 // the delay between showing pins on the map
@@ -86,4 +65,12 @@ function processListings(data) {
 	else {
 		alert('There were no listings returned from MLS in the selected area.');		
 	}
+}
+
+function clearMarkers() {
+	for (var i in markers) {
+		markers[i].setMap(null); // clear from map
+	}
+	
+	markers = []; // reset array
 }
