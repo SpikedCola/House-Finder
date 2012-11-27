@@ -70,17 +70,49 @@ function processListings(data) {
 	if (data.results.length > 0) {
 		var results = data.results;
 		
-		for (var i in results) {
+		// want to keep the var i = ... format so we have a row counter
+		for (var i = 0; i < results.length; i++) {
+			var result = results[i];
 			// make a new marker on the map for each listing. also add
 			// to the listings table
 			
 			var marker = new google.maps.Marker({ 
 				map: map, 
-				icon: 'http://www.mls.ca/presentation/images/en-ca/icons/dot_small.gif',
-				position: new google.maps.LatLng(results[i].Latitude, results[i].Longitude)
+				icon: 'images/dot_small.gif',
+				position: new google.maps.LatLng(result.Latitude, result.Longitude)
 			});
 
 			markers.push(marker); // add marker to list so we can remove it later
+			
+			var bedrooms = [];
+			
+			if (result.bedrooms.above > 0) {
+				bedrooms.push(result.bedrooms.above + ' above ground');
+			}
+			
+			if (result.bedrooms.below > 0) {
+				bedrooms.push(result.bedrooms.below + ' below ground');
+			}
+			
+			var bedroomString = bedrooms.join(', ');
+			var photoString = '';
+			
+			if (results.photos.length > 0) {
+				for (var p in result.photos) {
+					photoString += '';
+				}
+			}
+			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos
+			var row = $('<tr>' + 
+				'<td>' + (i + 1) + '</td>' +
+				'<td>' + result.price + ' ' + result.frequency + '</td>' +
+				'<td>' + result.address + '</td>' +
+				'<td>' + bedroomString + '</td>' +
+				'<td>' + result.bathrooms + '</td>' +
+				'<td>' + r + '</td>' +
+				'</tr>');
+			
+			$("#listings-table tbody").append(row);
 		}
 	}
 	else {

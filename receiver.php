@@ -100,6 +100,9 @@
                                         case 'Address':
                                                 $listing['address'] = ucwords(strtolower($value));
                                                 break;
+                                        case 'Bathrooms':
+                                                $listing['bathrooms'] = $value;
+                                                break;
                                         case 'BedroomsAboveGround':
                                                 if (is_numeric($value)) {
                                                         $listing['bedrooms']['above'] = $value;
