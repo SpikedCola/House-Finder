@@ -1,4 +1,5 @@
 $(function() {        
+        $("#listings-table").tablesorter(); 
         $("#map-container").resizable(); // only allow bottom resizing
         $("#map-button").on('click', function(e) {
                 e.preventDefault();
@@ -13,5 +14,11 @@ $(function() {
                                 $("#map-button").removeClass('down-arrow').addClass('up-arrow');
                         });
                 }
+        });
+        $("#listings-table tbody tr").on('mouseenter', function() {
+                $(this).addClass('hover');
+        });
+        $("#listings-table tbody tr").on('mouseleave', function() {
+                $(this).removeClass('hover');
         });
 });

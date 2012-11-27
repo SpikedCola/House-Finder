@@ -1,5 +1,6 @@
 body {
         margin: 0px;
+        font-family: Droid Sans;
 }
 
 /* -----------------------------------*/
@@ -49,6 +50,28 @@ body {
 #listings-container {
         margin-top: 50px;
 }
+
 #listings-table {
         width: 100%;
+        text-align: center;
+}
+
+#listings-table thead {
+        font-size: 18px;
+}
+
+#listings-table tbody td {
+        padding: 5px 0px 5px 0px;
+}
+
+.even {
+        
+}
+
+.odd {
+        background: #ddd;
+}
+
+.hover {
+        background: #eee !important;
 }

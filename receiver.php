@@ -83,7 +83,8 @@
                                 'above' => 0,
                                 'below' => 0,
                                 'total' => 0
-                            )
+                            ),
+                            'photos' => array()
                         );
                         
                         foreach ($result as $key => $value) {

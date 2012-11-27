@@ -49,9 +49,10 @@ function processListings(data) {
 	if (data.results.length > 0) {
 		var results = data.results;
 		
-		// want to keep the var i = ... format so we have a row counter
-		for (var i = 0; i < results.length; i++) {
+		for (var i in results) {
 			var result = results[i];
+                        var photos = result.photos;
+                        
 			// make a new marker on the map for each listing. also add
 			// to the listings table
 			
@@ -72,23 +73,39 @@ function processListings(data) {
 			if (result.bedrooms.below > 0) {
 				bedrooms.push(result.bedrooms.below + ' below ground');
 			}
+                        
+                        // if no bedrooms were sent, display '---'
+                        if (bedrooms.length == 0) {
+                                bedrooms.push('---');
+                        }
+
+                        //same with address
+			if (result.address == '') {
+                                result.address = '---';
+                        }
+                        
+                        var linkString = '0';
 			
-			var bedroomString = bedrooms.join(', ');
-			var photoString = '';
-			
-			if (results.photos.length > 0) {
-				for (var p in result.photos) {
-					photoString += '';
+			if (photos.length > 0) {
+                                var fancyPhotos = [];
+                                var fancyOptions = { padding: 0, loop: false};
+                                
+				for (var p in photos) {
+                                        fancyPhotos.push({ href: photos[p], title: 'Photo ' + (parseInt(p, 10) + 1) });
 				}
-			}
+                
+                                var onclickString = '$.fancybox.open(' + JSON.stringify(fancyPhotos) + ',' + JSON.stringify(fancyOptions) + ');';
+                                linkString = '<a href=\'#\' onclick=\'' + onclickString + ' return false;\'>' + photos.length + '</a>';
+                        }
+                
 			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos
-			var row = $('<tr>' + 
-				'<td>' + (i + 1) + '</td>' +
+			var row = $('<tr class="' + (i % 2 == 0 ? 'even' : 'odd') + '">' + 
+				'<td>' + (parseInt(i, 10) + 1) + '</td>' +
 				'<td>' + result.price + ' ' + result.frequency + '</td>' +
 				'<td>' + result.address + '</td>' +
-				'<td>' + bedroomString + '</td>' +
+				'<td>' + bedrooms.join(', ') + '</td>' +
 				'<td>' + result.bathrooms + '</td>' +
-				'<td>' + r + '</td>' +
+				'<td>' + linkString + '</td>' +
 				'</tr>');
 			
 			$("#listings-table tbody").append(row);
@@ -97,6 +114,9 @@ function processListings(data) {
 	else {
 		alert('There were no listings returned from MLS in the selected area.');		
 	}
+
+        // tell the tablesorter that we've updated the table
+        $("#listings-table").trigger("update"); 
 }
 
 function clearMarkers() {
