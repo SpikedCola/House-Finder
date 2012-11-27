@@ -54,6 +54,7 @@ body {
 #listings-table {
         width: 100%;
         text-align: center;
+        border-spacing: 0px;
 }
 
 #listings-table thead {
@@ -64,14 +65,10 @@ body {
         padding: 5px 0px 5px 0px;
 }
 
-.even {
-        
-}
-
 .odd {
-        background: #ddd;
+        background: #eee;
 }
 
 .hover {
-        background: #eee !important;
+        background: #ddd;
 }

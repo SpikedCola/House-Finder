@@ -15,10 +15,10 @@ $(function() {
                         });
                 }
         });
-        $("#listings-table tbody tr").on('mouseenter', function() {
+        $("#listings-table tbody tr").live('mouseenter', function() {
                 $(this).addClass('hover');
         });
-        $("#listings-table tbody tr").on('mouseleave', function() {
+        $("#listings-table tbody tr").live('mouseleave', function() {
                 $(this).removeClass('hover');
         });
 });

@@ -1,3 +1,5 @@
+var markers = []; 
+
 // ideally we should do the requests on the client-side, but we will run
 // into cross-domain trouble, so itll have to be server-side :(
 
@@ -42,7 +44,6 @@ function doSearch() {
 // process the listings we receive from our API. this should handle
 // the condition of no listings returned. the 'delay' variable sets 
 // the delay between showing pins on the map
-var markers = []; 
 var delay = 25;
 
 function processListings(data) {
@@ -61,7 +62,7 @@ function processListings(data) {
 				icon: 'images/dot_small.gif',
 				position: new google.maps.LatLng(result.Latitude, result.Longitude)
 			});
-
+                
 			markers.push(marker); // add marker to list so we can remove it later
 			
 			var bedrooms = [];
@@ -99,7 +100,7 @@ function processListings(data) {
                         }
                 
 			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos
-			var row = $('<tr class="' + (i % 2 == 0 ? 'even' : 'odd') + '">' + 
+			var row = $('<tr class="' + (i % 2 != 0 ? 'odd' : '') + '">' + 
 				'<td>' + (parseInt(i, 10) + 1) + '</td>' +
 				'<td>' + result.price + ' ' + result.frequency + '</td>' +
 				'<td>' + result.address + '</td>' +
