@@ -22,9 +22,6 @@
                                                 </tr>
                                         </thead>
                                         <tbody>
-                                                <tr>
-                                                        
-                                                </tr>
                                         </tbody>
                                 </table>
                         </div>
