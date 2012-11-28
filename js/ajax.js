@@ -55,7 +55,8 @@ function processListings(data) {
 		for (var i in results) {
 			var result = results[i];
                         var photos = result.photos;
-                        
+                        var bedrooms = [];
+			
 			// make a new marker on the map for each listing. also add
 			// to the listings table
 			
@@ -67,8 +68,6 @@ function processListings(data) {
                 
 			markers.push(marker); // add marker to list so we can remove it later
 
-                        var bedrooms = [];
-			
 			if (result.bedrooms.above > 0) {
 				bedrooms.push(result.bedrooms.above + ' above ground');
 			}
@@ -94,7 +93,7 @@ function processListings(data) {
                                 var fancyOptions = { padding: 0, loop: false};
                                 
 				for (var p in photos) {
-                                        fancyPhotos.push({ href: photos[p], title: 'Photo ' + (parseInt(p, 10) + 1) });
+                                        fancyPhotos.push({ href: photos[p], title: 'Photo ' + (parseInt(p, 10) + 1) + ' of ' + photos.length });
 				}
                 
                                 var onclickString = '$.fancybox.open(' + JSON.stringify(fancyPhotos) + ',' + JSON.stringify(fancyOptions) + ');';
