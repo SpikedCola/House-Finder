@@ -13,6 +13,7 @@ function doSearch() {
                 data: { location: bounds.toUrlValue(10) }, // thanks google!
                 success: function(data) {
 			clearMarkers();
+                        clearListings();
 			
                         if (data.status) {
 				switch (data.status) {
@@ -36,6 +37,7 @@ function doSearch() {
                 },
                 error: function() {
 			clearMarkers();
+                        clearListings();
                         showError();     
                 }
         });
@@ -64,8 +66,8 @@ function processListings(data) {
 			});
                 
 			markers.push(marker); // add marker to list so we can remove it later
-			
-			var bedrooms = [];
+
+                        var bedrooms = [];
 			
 			if (result.bedrooms.above > 0) {
 				bedrooms.push(result.bedrooms.above + ' above ground');
@@ -126,4 +128,8 @@ function clearMarkers() {
 	}
 	
 	markers = []; // reset array
+}
+
+function clearListings() {
+        $("#listings-table tbody tr").remove();
 }
