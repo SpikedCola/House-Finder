@@ -1,0 +1,36 @@
+<?php /* Smarty version 2.6.27, created on 2012-11-29 17:40:54
+         compiled from C:%5Cwamp%5Cwww%5Cmls/templates/index.tpl */ ?>
+<html>
+        <head>
+                <?php $_smarty_tpl_vars = $this->_tpl_vars;
+$this->_smarty_include(array('smarty_include_tpl_file' => "head.tpl", 'smarty_include_vars' => array()));
+$this->_tpl_vars = $_smarty_tpl_vars;
+unset($_smarty_tpl_vars);
+ ?>
+        </head> 
+        <body>
+                <div id="map-container"></div>
+                <div id="map-button" class="up-arrow"><a href="#" class="fill-div" title="Show/Hide Map"></a></div>
+                <div id="body-container">
+                        <h1>MLS Listing Search</h1>
+                        <p>Welcome! This tool will help you find MLS listings in an area of interest.</p>
+                        <p>To get started, adjust the rectangle on the map above to cover your desired living area. MLS listings found inside the rectangle will automatically appear below.</p>
+                        <div id="listings-container">
+                                <table id="listings-table">
+                                        <thead>
+                                                <tr>
+                                                        <th>Map Marker</th>
+                                                        <th>Price</th>
+                                                        <th>Address</th>
+                                                        <th>Bedrooms</th>
+                                                        <th>Bathrooms</th>
+                                                        <th>Photos</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                </table>
+                        </div>
+                </div>
+        </body>
+</html>

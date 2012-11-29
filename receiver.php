@@ -114,6 +114,12 @@
                                                         $listing['bedrooms']['below'] = $value;
                                                 }
                                                 break;
+                                        case 'Latitude':
+                                                $listing['latitude'] = $value;
+                                                break;
+                                        case 'Longitude':
+                                                $listing['longitude'] = $value;
+                                                break;
                                         case 'PropertyLowResPhotos':
                                                 $photos = array();
 

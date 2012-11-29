@@ -63,7 +63,7 @@ function processListings(data) {
 			var marker = new google.maps.Marker({ 
 				map: map, 
 				icon: 'images/dot_small.gif',
-				position: new google.maps.LatLng(result.Latitude, result.Longitude)
+				position: new google.maps.LatLng(result.latitude, result.longitude)
 			});
                 
 			markers.push(marker); // add marker to list so we can remove it later
