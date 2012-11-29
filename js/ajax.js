@@ -57,17 +57,10 @@ function processListings(data) {
                         var photos = result.photos;
                         var bedrooms = [];
 			
-			// make a new marker on the map for each listing. also add
-			// to the listings table
-			
-			var marker = new google.maps.Marker({ 
-				map: map, 
-				icon: 'images/dot_small.gif',
-				position: new google.maps.LatLng(result.latitude, result.longitude)
-			});
-                
-			markers.push(marker); // add marker to list so we can remove it later
-
+			// make a new marker on the map for each listing.
+                        // also add results to the listings table.
+			addMarker(result.latitude, result.longitude);
+                        
 			if (result.bedrooms.above > 0) {
 				bedrooms.push(result.bedrooms.above + ' above ground');
 			}
@@ -131,4 +124,24 @@ function clearMarkers() {
 
 function clearListings() {
         $("#listings-table tbody tr").remove();
+}
+
+function addMarker(latitude, longitude) {
+        var marker = new google.maps.Marker({ 
+                map: map, 
+                icon: 'images/dot_small.gif',
+                position: new google.maps.LatLng(latitude, longitude)
+        });
+
+        markers.push(marker); // add marker to list so we can remove it later
+        
+        // also add event listeners for when we hover over the marker
+        google.maps.event.addListener(marker, "mouseover", mouseEnteredMarker);
+        google.maps.event.addListener(marker, "mouseout", mouseLeftMarker);
+}
+
+function mouseEnteredMarker(e) {
+}
+
+function mouseLeftMarker(e) {
 }

@@ -39,6 +39,8 @@ function initialize() {
         // probably a better way to do this
         map.setCenter(rectangle.getBounds().getCenter());
         
+        // == event listeners ==
+        
 	// we need to differentiate between bounds_changed when we are dragging
 	// (automatically resizing the rectangle) vs the user changing the bounds
 	// and thus wanting to doSearch. flag in dragstart and dragend
