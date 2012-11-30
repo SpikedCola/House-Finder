@@ -1,4 +1,4 @@
-var map, rectangle, dragging;
+var map, centerMarker, rectangle, dragging;
 
 function initialize() {
         var startLocation = new google.maps.LatLng(43.56, -79.67); 
@@ -44,7 +44,7 @@ function initialize() {
         });
         
 	// this marker will be the center of the rectangle
-        var centerMarker = new google.maps.Marker({ 
+        centerMarker = new google.maps.Marker({ 
                 map: map, 
                 position: rectangle.getBounds().getCenter(),
                 draggable: true, 

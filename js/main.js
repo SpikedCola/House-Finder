@@ -11,6 +11,7 @@ $(function() {
                 }
                 else {
                         $("#map-container").slideDown(500, function() {
+                                map.panTo(centerMarker.getPosition());
                                 $("#map-button").removeClass('down-arrow').addClass('up-arrow');
                         });
                 }

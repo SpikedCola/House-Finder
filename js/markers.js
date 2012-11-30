@@ -24,11 +24,15 @@ function addMarker(latitude, longitude) {
 }
 
 function mouseEnteredMarker() {
+        this.setIcon('images/blue.png');
         var id = parseInt(markers.indexOf(this), 10);
+        markers[id].setZIndex(1000);
         $('#listings-table tbody tr:eq(' + id + ')').addClass('hover');
 }
 
 function mouseLeftMarker() {
+        this.setIcon('images/red.png');
         var id = parseInt(markers.indexOf(this), 10);
+        markers[id].setZIndex(id);
         $('#listings-table tbody tr:eq(' + id + ')').removeClass('hover');
 }
