@@ -34,18 +34,18 @@ function processListings(data) {
                                 result.address = '---';
                         }
                         
-                        var linkString = '0';
+                        var linkString = '---';
 			
 			if (photos.length > 0) {
                                 var fancyPhotos = [];
-                                var fancyOptions = { padding: 0, loop: false};
+                                var fancyOptions = { padding: 0, loop: false };
                                 
 				for (var p in photos) {
                                         fancyPhotos.push({ href: photos[p], title: 'Photo ' + (parseInt(p, 10) + 1) + ' of ' + photos.length });
 				}
                 
                                 var onclickString = '$.fancybox.open(' + JSON.stringify(fancyPhotos) + ',' + JSON.stringify(fancyOptions) + ');';
-                                linkString = '<a href=\'#\' onclick=\'' + onclickString + ' return false;\'>' + photos.length + '</a>';
+                                linkString = '<a href=\'#\' onclick=\'' + onclickString + ' return false;\'>' + photos.length + ' photo(s)</a>';
                         }
                 
 			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos

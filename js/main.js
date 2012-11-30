@@ -1,6 +1,5 @@
 $(function() {        
         $("#listings-table").tablesorter(); 
-        $("#map-container").resizable(); // only allow bottom resizing
         $("#map-button").on('click', function(e) {
                 e.preventDefault();
                 
