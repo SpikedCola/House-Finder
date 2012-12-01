@@ -17,3 +17,12 @@ CREATE TABLE IF NOT EXISTS `ignored_listings` (
   `date` int(12) unsigned NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+
+--
+-- Table structure for table `unique_ids`
+--
+
+CREATE TABLE IF NOT EXISTS `unique_ids` (
+  `unique_id` char(23) NOT NULL,
+  UNIQUE KEY `unique_id` (`unique_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
