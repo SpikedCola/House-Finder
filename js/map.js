@@ -29,6 +29,10 @@ function initialize() {
                 center: startLocation,
                 zoom: startZoom,
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
+		zoomControl: true,
+		zoomControlOptions: {
+			style: google.maps.ZoomControlStyle.LARGE
+		},
 		streetViewControl: false, // disable street view
 		mapTypeControl: false // disable satellite view
         };

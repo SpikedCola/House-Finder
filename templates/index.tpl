@@ -47,11 +47,16 @@
                         <h1>MLS Listing Search</h1>
                         <p>Welcome! This tool will help you find MLS listings in an area of interest.</p>
                         <div id="tips">
-                                <h2>Tips:</h2>
+                                <h2>Getting started</h2>
                                 <ul>
-                                <li>To get started, you will need to adjust the rectangle on the map above to cover your desired living area.</li>
-                                <li>To move the whole rectangle, drag the marker in the center. To resize the rectangle, drag one of the white circles along the edge.</li>
-                                <li>If you would like to see more or less of the map, you can resize it by dragging the black line at the bottom of the map.</li>
+                                <li>First, adjust the rectangle on the map above to cover your desired living area.</li>
+                                <ul>
+					<li>To move the whole rectangle, click drag the marker in the center.</li>
+					<li>To resize the rectangle, click and drag one of the white circles along its edge.</li>
+				</ul>
+                                <li>If you would like to make the map bigger or smaller, you can resize it by dragging the thick black line on the bottom edge of the map.</li>
+                                <ul><li>You can also hide and show the map by clicking the arrow just underneath it.</li></ul>
+                                <li>Your desired location and search options will be remembered when you come back! No need to log in.</li>
                                 </ul>
                                 <p>MLS listings found inside the rectangle will automagically appear below.</p>
                         </div>
