@@ -1,5 +1,9 @@
-function showError() {
+function showSearchError() {
         alert('An error occured while trying to get MLS listings. Please try again later.');
+}
+
+function showIgnoreListingError() {
+        alert('An error occured while trying to ignore an MLS listing. Please try again later.');
 }
 
 function showTooMany() {

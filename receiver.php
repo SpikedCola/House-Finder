@@ -1,12 +1,13 @@
 <?php
-        if (array_key_exists('location', $_POST) && array_key_exists('uniqueid', $_COOKIE) && !empty($_POST['location'])) {
+	// request for results at given location
+        if (array_key_exists('location', $_POST) && array_key_exists('uniqueId', $_COOKIE) && !empty($_POST['location'])) {
 		// Returns a string of the form "lat_lo,lng_lo,lat_hi,lng_hi" for this bounds, 
 		// where "lo" corresponds to the SW of the bounding box and
 		// "hi" corresponds to the NE corner of the box.
 		$location = $_POST['location'];
 		list($lowLat, $lowLng, $highLat, $highLng) = explode(',', $location);
 		
-                $response = array(
+                $ret = array(
                     'status' => 'error',
                     'results' => array()
                 );
@@ -34,41 +35,65 @@
 		
                 $url = 'http://www.realtor.ca/handlers/MapSearchHandler.ashx?xml=' . urlencode($xmlString);
 
-                $jsonResponse = get($url);
+		$ch = curl_init($url);
 
-		// need to escape backslashes so json_decode doesnt error out :)
-		$jsonResponse['response'] = str_replace('\\', '\\\\', $jsonResponse['response']);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11');
+
+		$response = curl_exec($ch);
+		$info = curl_getinfo($ch);
+
+		curl_close($ch);
 		
-		if (!empty($jsonResponse['response'])) {
-                        $json = json_decode($jsonResponse['response']);
+		if (!empty($response) && $info['http_code'] == 200) {
+			// need to escape backslashes so json_decode doesnt error out :)
+                        $json = json_decode(str_replace('\\', '\\\\', $response));
 
                         if (isset($json->NumberSearchResults)) {
 				if ($json->NumberSearchResults > 0 && isset($json->MapSearchResults)) {
 					// data is probably valid :)
-					$response['status'] = 'ok';
-					$response['results'] = processResults($json->MapSearchResults);
+					$ret['status'] = 'ok';
+					$ret['results'] = processResults($json->MapSearchResults);
 				}
 				else if ($json->NumberSearchResults > 0 && !isset($json->MapSearchResults)) {
                                         // when we have a count but no results, MLS is saying "too many"
-					$response['status'] = 'toomany';
+					$ret['status'] = 'toomany';
 				}
 				else if ($json->NumberSearchResults == 0) {
-					$response['status'] = 'none';
+					$ret['status'] = 'none';
 				}
 				else {
-					$response['status'] = 'error';
-					$response['results'] = $jsonResponse['response'];
+					$ret['status'] = 'error';
+					$ret['results'] = $response;
 				}
                         }
 			else {
-				$response['status'] = 'error';
-				$response['results'] = $jsonResponse['response'];
+				$ret['status'] = 'error';
+				$ret['results'] = $response;
 			}
                 }
                 
-                echo json_encode($response);
+                echo json_encode($ret);
                 exit;
         }
+	// request to ignore a certain mls id given a certain uniqueId
+	else if (array_key_exists('id', $_POST) && array_key_exists('uniqueId', $_COOKIE)) {
+		require_once(__DIR__ . '/classes/db.php');
+		$db = new Db();
+		
+		if ($db->user_exists($_COOKIE['uniqueId'])) {
+			$query = $db->prepare('
+				INSERT INTO ignored_listings 
+				(user_id, listing_id, date) VALUES (?, ?, UNIX_TIMESTAMP())
+			');
+
+			$query->bind_param('ii', $_COOKIE['uniqueId'], $_POST['id']);
+
+			$query->execute();
+
+			exit;
+		}
+	}
         
         header("HTTP/1.1 403 Forbidden");
 	
@@ -143,31 +168,5 @@
                 }
                 
                 return $ret;
-        }
-        
-	/**
-	 * GET a url
-	 * 
-	 * @param string $url Url to get
-	 * @param bool $doLoginCheck False to bypass "should login" check
-	 * @return array containing response, info and error
-	 */
-	function get($url) {
-		$ch = curl_init($url);
-
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.64 Safari/537.11');
-
-		$response = curl_exec($ch);
-		$info = curl_getinfo($ch);
-		$error = curl_error($ch);
-
-		curl_close($ch);
-
-		return array(
-		    'response' => $response,
-		    'info' => $info,
-		    'error' => $error
-		    );
-	}
+        }	
 ?>

@@ -25,18 +25,34 @@ function doSearch() {
 						showTooMany();
 						break;
 					default: 
-						showError();
+						showSearchError();
 						break;
 				}
                         }
                         else {
-                                showError();
+                                showSearchError();
                         }
                 },
                 error: function() {
 			clearMarkers();
                         clearListings();
-                        showError();     
+                        showSearchError();     
+                }
+        });
+}
+
+function ignoreListing(listing) {
+	var user_id = getCookie('uniqueId');
+        $.ajax({
+                url: 'receiver.php',
+                type: 'post',
+                dataType: 'json',
+                data: { id: listing, user_id: user_id }, // thanks google!
+                success: function() {
+			// strike out the line
+                },
+                error: function() {
+                        showIgnoreListingError();     
                 }
         });
 }
