@@ -5,36 +5,42 @@ $(function() {
                 e.preventDefault();
                 
                 if ($(this).hasClass('up-arrow')) {
-                        $("#map-container").slideUp(500, function() {
+                        $("#map-container").slideUp(1000, 'easeOutQuad', function() {
                                 $("#map-button").removeClass('up-arrow').addClass('down-arrow');
                         });
                 }
                 else {
-                        $("#map-container").slideDown(500, function() {
+                        $("#map-container").slideDown(1000, 'easeOutQuad', function() {
                                 map.panTo(centerMarker.getPosition());
                                 $("#map-button").removeClass('down-arrow').addClass('up-arrow');
                         });
                 }
         });
-
+	
+	// show/hide options container
         $("#config-button").on('click', function(e) {
                 e.preventDefault();
                 
 		if ($("#options-container").is(':visible')) {
-                        $("#options-container").slideUp(500, function() {
-                                //$("#options-container").removeClass('hidden');
-                        });
+                        $("#options-container").slideUp(700, 'easeOutQuad');
                 }
                 else {
-                        $("#options-container").slideDown(500, function() {
-                                //map.panTo(centerMarker.getPosition());
-                                //$("#options-container").addClass('hidden');
-                        });
+                        $("#options-container").slideDown(700, 'easeOutQuad');
                 }
 	});
 
+	// hide the options container if the user clicks the outside it
+	$("#body-container").on('click', function(e) {
+		if ($("#options-container").is(":visible")) {
+                        $("#options-container").slideUp(700, 'easeOutQuad');
+		}
+	});
+
+	// save options button
 	$("#save-button").on('click', function(e) {
 		e.preventDefault();
+		$(this).hide();
+		$("#spinner").show();
 		saveOptions();
 	});
 

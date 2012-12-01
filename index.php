@@ -1,6 +1,8 @@
 <?php
         require_once('Smarty/Smarty.class.php');
 	require_once(__DIR__ . '/classes/db.php');
+	
+	$db = new Db();
         
 	// if the user has never been here before, cookie them
 	// this way, we can allow them to hide ads "forever".
@@ -9,9 +11,14 @@
 	
 	if (empty($_COOKIE['uniqueId'])) {
 		$value = uniqid('MLS', true);
-		setcookie('uniqueId', $value, 0x7FFFFFFF, '/');
-		$db = new Db();
+
+		// this should never happen, but who knows
+		if ($db->user_exists($value)) {
+			$value = uniqid('MLS', true);
+		}
+		
 		$db->add_user($value);
+		setcookie('uniqueId', $value, 0x7FFFFFFF, '/');
 	}
 	
         $template = new Smarty();

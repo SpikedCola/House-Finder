@@ -2,15 +2,14 @@
 	// Returns a string of the form "lat_lo,lng_lo,lat_hi,lng_hi" for this bounds, 
 	// where "lo" corresponds to the SW of the bounding box and
 	// "hi" corresponds to the NE corner of the box.
-	$location = $_POST['location'];
-	list($lowLat, $lowLng, $highLat, $highLng) = explode(',', $location);
+	list($lowLat, $lowLng, $highLat, $highLng) = explode(',', $_POST['location']);
 
 	$ret = array(
 	    'status' => 'error',
 	    'results' => array()
 	);
 
-	$xmlFile = __DIR__ . '/request.xml';
+	$xmlFile = __DIR__ . '/../request.xml';
 	$xml = simplexml_load_file($xmlFile);
 
 	// add a bit of padding to the user's box so we dont return results 
@@ -72,4 +71,77 @@
 	}
 
 	echo json_encode($ret);
+	
+        function processResults($results) {
+                $ret = array();
+                
+                foreach ($results as $result) {
+                        $imageUrl = str_replace('lowres', 'highres', $result->PropertyLowResImagePath);
+
+                        $listing = array(
+                            'bedrooms' => array(
+                                'above' => 0,
+                                'below' => 0,
+                                'total' => 0
+                            ),
+                            'photos' => array()
+                        );
+                        
+                        foreach ($result as $key => $value) {
+                                switch ($key) {
+                                        case 'MLS':
+                                                $listing['id'] = $value;
+                                                break;
+                                        case 'LeaseRent':
+                                                $listing['price'] = $value;
+                                                break;
+                                        case 'LeaseRentPerTime':
+                                                $listing['frequency'] = strtolower($value);
+                                                break;
+                                        case 'Address':
+                                                $listing['address'] = ucwords(strtolower($value));
+                                                break;
+                                        case 'Bathrooms':
+                                                $listing['bathrooms'] = $value;
+                                                break;
+                                        case 'BedroomsAboveGround':
+                                                if (is_numeric($value)) {
+                                                        $listing['bedrooms']['above'] = $value;
+                                                }
+                                                break;
+                                        case 'BedroomsBelowGround':
+                                                if (is_numeric($value)) {
+                                                        $listing['bedrooms']['below'] = $value;
+                                                }
+                                                break;
+                                        case 'Latitude':
+                                                $listing['latitude'] = $value;
+                                                break;
+                                        case 'Longitude':
+                                                $listing['longitude'] = $value;
+                                                break;
+                                        case 'PropertyLowResPhotos':
+                                                $photos = array();
+
+                                                // to make life easier, store the whole URL
+                                                foreach ($value as $p) {
+                                                        $photos[] = $imageUrl . $p;
+                                                }
+
+                                                $listing['photos'] = $photos;
+                                                break;
+                                        default: 
+                                                break;
+                                }
+                        }
+        
+                        $listing['bedrooms']['total'] = $listing['bedrooms']['above'] + $listing['bedrooms']['below'];
+                        
+                        ksort($listing); // for consistency
+                        
+                        $ret[] = $listing;
+                }
+                
+                return $ret;
+        }	
 ?>

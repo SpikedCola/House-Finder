@@ -39,7 +39,7 @@
 						<td colspan="2"><label><input type="checkbox" id="address" name="address" /> Must have a listed address</label></td>
 					</tr>
 					<tr><td colspan="2">&nbsp;</td></tr>
-					<tr><td colspan="2" style="text-align: center;"><button id="save-button">Save Options</button></td></tr>
+					<tr><td colspan="2" style="text-align: center;"><img id="spinner" src="images/spinner.gif" /><img id="check" src="images/check.png" /><button id="save-button">Save Options</button></td></tr>
 				</tfoot>
 			</table>		
 		</div>

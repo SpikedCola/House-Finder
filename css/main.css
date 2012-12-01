@@ -119,6 +119,7 @@ body {
 
 #options-container h2 {
 	margin-top: 0px;
+	padding-top: 5px;
 }
 
 #config-table tbody td:first-child {
@@ -132,4 +133,8 @@ body {
 
 #save-button {
 	font-size: 16px;
+}
+
+#spinner, #check {
+	display: none;
 }

@@ -13,7 +13,7 @@ function doSearch() {
 			clearMarkers();
                         clearListings();
 			
-                        if (data.status) {
+                        if (data !== null && data.status) {
 				switch (data.status) {
 					case 'ok':
 						processListings(data);
@@ -71,7 +71,6 @@ function saveOptions() {
                 dataType: 'json',
                 data: { 
 			action: 'save',
-			user_id: user_id,
 			type: type,
 			minPrice: minPrice,
 			maxPrice: maxPrice,
@@ -79,9 +78,16 @@ function saveOptions() {
 			address: address 
 		}, 
                 success: function() {
-			$("#options-container").slideUp(700);
+			$("#spinner").hide();
+			$("#check").show();
+			$("#options-container").delay(1000).slideUp(700, function() {
+				$("#check").hide();
+				$("#save-button").show();
+			});
                 },
                 error: function() {
+			$("#spinner").hide();
+			$("#save-button").show();
                         showSaveOptionsError(); 
                 }
         });
