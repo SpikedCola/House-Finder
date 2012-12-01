@@ -56,6 +56,7 @@ function processListings(data) {
 				'<td>' + bedrooms.join(', ') + '</td>' +
 				'<td>' + result.bathrooms + '</td>' +
 				'<td>' + linkString + '</td>' +
+				'<td><div style="width: 16px; height: 16px; background: no-repeat url(\'images/x.png\')"><a title="Hide This Listing" class="fill-div" href="#"></a></div></td>' +
 				'</tr>');
 			
 			$("#listings-table tbody").append(row);

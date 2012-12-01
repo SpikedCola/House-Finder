@@ -12,7 +12,21 @@ body {
         border-bottom: 3px solid black;
 }
 
+/* Buttons*/
+#button-container {
+	text-align: center;
+}
+
 #map-button {
+	display: inline-block;
+        margin: 0px auto;
+        width: 32px;
+        height: 32px;
+}
+
+#config-button {
+	display: inline-block;
+        background-image: url('../images/config.png');
         margin: 0px auto;
         width: 32px;
         height: 32px;
@@ -26,6 +40,7 @@ body {
         background-image: url('../images/up.png');
 }
 
+/* This will make a link fill up the div, making the div clickable */
 .fill-div {
         display: block;
         width: 100%;
@@ -81,4 +96,40 @@ body {
 /* Hide Tips container */
 #hide-tips {
         margin-left: 20px;
+}
+
+.hidden {
+	display: none;
+}
+
+/* Options Container */
+#options-container {
+	border: 1px solid black;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+	position: absolute;
+	left: 43%;
+	background: white;
+	padding: 10px;
+	width: 250px;
+	margin-top: 25px;
+	display: none;
+}
+
+#options-container h2 {
+	margin-top: 0px;
+}
+
+#config-table tbody td:first-child {
+	text-align: right;
+}
+
+.price-textbox {
+	width: 60px;
+	text-align: center;
+}
+
+#save-button {
+	font-size: 16px;
 }

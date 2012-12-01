@@ -17,6 +17,26 @@ $(function() {
                 }
         });
 
+        $("#config-button").on('click', function(e) {
+                e.preventDefault();
+                
+		if ($("#options-container").is(':visible')) {
+                        $("#options-container").slideUp(500, function() {
+                                //$("#options-container").removeClass('hidden');
+                        });
+                }
+                else {
+                        $("#options-container").slideDown(500, function() {
+                                //map.panTo(centerMarker.getPosition());
+                                //$("#options-container").addClass('hidden');
+                        });
+                }
+	});
+
+	$("#save-button").on('click', function(e) {
+		e.preventDefault();
+		saveOptions();
+	});
 
         // these two handle the mouse hovering over the table rows
         // we would like to change the related marker to blue on hover

@@ -8,7 +8,7 @@ function doSearch() {
                 url: 'receiver.php',
                 type: 'post',
                 dataType: 'json',
-                data: { location: bounds.toUrlValue(10) }, // thanks google!
+                data: { action: 'search', location: bounds.toUrlValue(10) }, // thanks google!
                 success: function(data) {
 			clearMarkers();
                         clearListings();
@@ -42,17 +42,47 @@ function doSearch() {
 }
 
 function ignoreListing(listing) {
-	var user_id = getCookie('uniqueId');
+	var user_id = readCookie('uniqueId');
         $.ajax({
                 url: 'receiver.php',
                 type: 'post',
                 dataType: 'json',
-                data: { id: listing, user_id: user_id }, // thanks google!
+                data: { action: 'ignore', id: listing, user_id: user_id }, 
                 success: function() {
 			// strike out the line
                 },
                 error: function() {
                         showIgnoreListingError();     
+                }
+        });
+}
+
+function saveOptions() {
+	var user_id = readCookie('uniqueId');
+	var type = $("input[name='for']:checked").val();
+	var minPrice = parseInt($("#min-price").val(), 10);
+	var maxPrice = parseInt($("#max-price").val(), 10);
+	var photo = $("#photo").attr('checked') == 'checked' ? true : false;
+	var address = $("#address").attr('checked') == 'checked' ? true : false;
+	
+        $.ajax({
+                url: 'receiver.php',
+                type: 'post',
+                dataType: 'json',
+                data: { 
+			action: 'save',
+			user_id: user_id,
+			type: type,
+			minPrice: minPrice,
+			maxPrice: maxPrice,
+			photo: photo,
+			address: address 
+		}, 
+                success: function() {
+			$("#options-container").slideUp(700);
+                },
+                error: function() {
+                        showSaveOptionsError(); 
                 }
         });
 }
