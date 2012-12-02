@@ -6,6 +6,10 @@ function showIgnoreListingError() {
         alert('An error occured while trying to ignore an MLS listing. Please try again later.');
 }
 
+function showUndoIgnoreListingError() {
+        alert('An error occured while trying to undo an MLS listing being ignored. Please try again later.');
+}
+
 function showSaveOptionsError() {
         alert('An error occured while trying to save your search options. Please try again later.');
 }

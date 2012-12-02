@@ -13,54 +13,17 @@
 		     </div>
 		</div>
 		<div id="options-container">
-			<h2>Search Options</h2>
-			<table id="config-table">
-				<tbody>
-					<tr>
-						<td style="vertical-align: top; padding-top: 1px;">For:</td>
-						<td><label><input type="radio" name="for" value="rent" checked="checked" />Rent</label><br /><label><input type="radio" name="for" value="sale" />Sale</label></td>
-					</tr>	
-					<tr><td colspan="2">&nbsp;</td></tr>
-					<tr>
-						<td><label for="min-price">Min. Price:</label></td>
-						<td><input id="min-price" class="price-textbox" maxlength="7" name="min-price" value="0" /></td>
-					</tr>	
-					<tr>
-						<td><label for="max-price">Max. Price:</label></td>
-						<td><input id="max-price" class="price-textbox" maxlength="7" name="max-price" value="1400" /></td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr><td colspan="2">&nbsp;</td></tr>
-					<tr>
-						<td colspan="2"><label><input type="checkbox" id="photo" name="photo" /> Must have at least 1 photo</label></td>
-					</tr>
-					<tr>
-						<td colspan="2"><label><input type="checkbox" id="address" name="address" /> Must have a listed address</label></td>
-					</tr>
-					<tr><td colspan="2">&nbsp;</td></tr>
-					<tr><td colspan="2" style="text-align: center;"><img id="spinner" src="images/spinner.gif" /><img id="check" src="images/check.png" /><button id="save-button">Save Options</button></td></tr>
-				</tfoot>
-			</table>		
+			{include file="search_options.tpl"}		
 		</div>
                 <div id="body-container">
                         <h1>MLS Listing Search</h1>
-                        <p>Welcome! This tool will help you find MLS listings in an area of interest.</p>
-                        <div id="tips">
-                                <h2>Getting started</h2>
-                                <ul>
-                                <li>First, adjust the rectangle on the map above to cover your desired living area.</li>
-                                <ul>
-					<li>To move the whole rectangle, click drag the marker in the center.</li>
-					<li>To resize the rectangle, click and drag one of the white circles along its edge.</li>
-				</ul>
-                                <li>If you would like to make the map bigger or smaller, you can resize it by dragging the thick black line on the bottom edge of the map.</li>
-                                <ul><li>You can also hide and show the map by clicking the arrow just underneath it.</li></ul>
-                                <li>Your desired location and search options will be remembered when you come back! No need to log in.</li>
-                                </ul>
-                                <p>MLS listings found inside the rectangle will automagically appear below.</p>
+                        Welcome! This tool will help you find MLS listings in exactly the area you want.
+			<br />
+                        <div id="tips"{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')} style="display: none;"{/if}>
+				{include file="tips.tpl"}	
                         </div>
-                        <div id="hide-tips">(<a id="hide-tips-button" href="#">Show/Hide Tips</a>)</div>
+			<br />
+                        <div id="hide-tips">(<a id="hide-button" href="#">{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')}Show{else}Hide{/if} Getting Started</a>)</div>
                         <div id="listings-container">
                                 <table id="listings-table">
                                         <thead>
@@ -79,5 +42,16 @@
                                 </table>
                         </div>
                 </div>
+		<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-36753326-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+		</script>
         </body>
 </html>

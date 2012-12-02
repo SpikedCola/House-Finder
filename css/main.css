@@ -93,6 +93,10 @@ body {
         margin-left: 20px;
 }
 
+#tips-list {
+	margin-bottom: 0px;
+}
+
 /* Hide Tips container */
 #hide-tips {
         margin-left: 20px;
@@ -137,4 +141,8 @@ body {
 
 #spinner, #check {
 	display: none;
+}
+
+.no-bullet {
+	list-style-type: none;
 }

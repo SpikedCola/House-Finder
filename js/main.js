@@ -22,10 +22,10 @@ $(function() {
                 e.preventDefault();
                 
 		if ($("#options-container").is(':visible')) {
-                        $("#options-container").slideUp(700, 'easeOutQuad');
+                        $("#options-container").slideUp(1000, 'easeOutQuad');
                 }
                 else {
-                        $("#options-container").slideDown(700, 'easeOutQuad');
+                        $("#options-container").slideDown(1000, 'easeOutQuad');
                 }
 	});
 
@@ -42,6 +42,24 @@ $(function() {
 		$(this).hide();
 		$("#spinner").show();
 		saveOptions();
+	});
+
+	// hide/show tips link
+	$("#hide-tips").on('click', function(e) {
+		e.preventDefault();
+		
+		if ($("#tips").is(':visible')) {
+                        $("#tips").slideUp(700, 'easeOutQuad', function() {
+				$("#hide-button").text('Show Getting Started');
+				setCookie('showGettingStarted', false);
+			});
+                }
+                else {
+                        $("#tips").slideDown(700, 'easeOutQuad', function() {
+				$("#hide-button").text('Hide Getting Started');
+				setCookie('showGettingStarted', true);
+			});
+                }
 	});
 
         // these two handle the mouse hovering over the table rows

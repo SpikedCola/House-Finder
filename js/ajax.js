@@ -41,18 +41,47 @@ function doSearch() {
         });
 }
 
-function ignoreListing(listing) {
-	var user_id = readCookie('uniqueId');
+function hideListing(id, listing) {
         $.ajax({
                 url: 'receiver.php',
                 type: 'post',
                 dataType: 'json',
-                data: { action: 'ignore', id: listing, user_id: user_id }, 
+                data: { action: 'ignore', id: listing }, 
                 success: function() {
 			// strike out the line
+			var row = $("#listings-table tbody tr").eq(id);
+			row.find('td').not('.nofade').animate({ opacity: 0.25 }, 400, 'easeOutQuad', function() {
+				row.find('.remove-link').hide();
+				row.find('.undo-link').show();
+				markers[id].setMap(null);
+				row.css('text-decoration', 'line-through');
+			});
                 },
                 error: function() {
                         showIgnoreListingError();     
+                }
+        });
+}
+
+
+function undoHideListing(id, listing) {
+        $.ajax({
+                url: 'receiver.php',
+                type: 'post',
+                dataType: 'json',
+                data: { action: 'ignore', undo: true, id: listing }, 
+                success: function() {
+			// strike out the line
+			var row = $("#listings-table tbody tr").eq(id);
+			row.css('text-decoration', 'none');
+			row.find('.undo-link').hide();
+			row.find('.remove-link').show();
+			row.find('td').not('.nofade').animate({ opacity: 1 }, 400, 'easeOutQuad', function() {
+				markers[id].setMap(map);
+			});
+                },
+                error: function() {
+                        showUndoIgnoreListingError();     
                 }
         });
 }

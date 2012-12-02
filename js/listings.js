@@ -11,6 +11,7 @@ function processListings(data) {
 			var result = results[i];
                         var photos = result.photos;
                         var bedrooms = [];
+			var id = parseInt(i, 10);
 			
 			// make a new marker on the map for each listing.
                         // also add results to the listings table.
@@ -50,13 +51,13 @@ function processListings(data) {
                 
 			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos
 			var row = $('<tr class="' + (i % 2 != 0 ? 'odd' : '') + '">' + 
-				'<td class="id">' + (parseInt(i, 10) + 1) + '</td>' +
+				'<td class="id">' + (id + 1) + '</td>' +
 				'<td>' + result.price + ' ' + result.frequency + '</td>' +
 				'<td>' + result.address + '</td>' +
 				'<td>' + bedrooms.join(', ') + '</td>' +
 				'<td>' + result.bathrooms + '</td>' +
 				'<td>' + linkString + '</td>' +
-				'<td><div style="width: 16px; height: 16px; background: no-repeat url(\'images/x.png\')"><a title="Hide This Listing" class="fill-div" href="#"></a></div></td>' +
+				'<td class="nofade"><a title="Hide This Listing" href="#" class="remove-link" onclick="hideListing(' + id + ', \'' + result.id + '\'); return false;"><img src="images/x.png" /></a><a href="#" title="Undo" class="undo-link" style="display: none;" onclick="undoHideListing(' + id + ', \'' + result.id + '\'); return false;"><img src="images/undo.png" /></a></td>' +
 				'</tr>');
 			
 			$("#listings-table tbody").append(row);
