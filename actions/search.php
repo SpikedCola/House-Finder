@@ -86,9 +86,15 @@
                             ),
                             'photos' => array()
                         );
-                        
+			
                         foreach ($result as $key => $value) {
                                 switch ($key) {
+					case 'PidKey': 
+                                                $listing['pidKey'] = $value;
+						break;
+					case 'PropertyID':
+                                                $listing['propertyId'] = $value;
+						break;
                                         case 'MLS':
                                                 $listing['id'] = $value;
                                                 break;

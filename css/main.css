@@ -85,7 +85,7 @@ body {
 }
 
 .hover {
-        background: #87cefa;
+        background: #87cefa !important;
 }
 
 /* Tips container */

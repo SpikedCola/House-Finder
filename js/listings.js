@@ -52,6 +52,7 @@ function processListings(data) {
 			//Map Marker	Price	Address	Bedrooms	Bathrooms	Photos
 			var row = $('<tr class="' + (i % 2 != 0 ? 'odd' : '') + '">' + 
 				'<td class="id">' + (id + 1) + '</td>' +
+				'<td><a href="http://mls.ca/propertyDetails.aspx?propertyId=' + result.propertyId + '&PidKey=' + result.pidKey + '" title="MLS Listing" target="_blank">MLS Listing</a></td>' +
 				'<td>' + result.price + ' ' + result.frequency + '</td>' +
 				'<td>' + result.address + '</td>' +
 				'<td>' + bedrooms.join(', ') + '</td>' +

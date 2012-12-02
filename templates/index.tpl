@@ -29,11 +29,13 @@
                                         <thead>
                                                 <tr>
                                                         <th>Map Marker</th>
+							<th></th>
                                                         <th>Price</th>
                                                         <th>Address</th>
                                                         <th>Bedrooms</th>
                                                         <th>Bathrooms</th>
                                                         <th>Photos</th>
+							<th></th>
                                                 </tr>
                                         </thead>
                                         <tbody>
