@@ -33,5 +33,24 @@
 			
 			$query->execute();
 		}
+                
+                function getIgnoredListings($user_id) {
+                        $ret = array();
+                        
+			$query = $this->db->prepare('SELECT * FROM ignored_listings WHERE user_id = ?');
+			
+			$query->bind_param('s', $user_id);
+			
+			$query->execute();
+			
+			if ($result = $query->get_result()) {
+                                while ($row = $result->fetch_object()) {
+                                        $ret[$row->listing_id] = $row->listing_id;
+
+                                }
+                        }
+                        
+                        return $ret;
+                }
 	}
 ?>

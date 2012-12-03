@@ -10,11 +10,11 @@
 	// an ad, we can validate their uniqueId
 	
 	if (empty($_COOKIE['uniqueId'])) {
-		$value = uniqid('MLS', true);
+		$value = uniqid('', true);
 
 		// this should never happen, but who knows
 		if ($db->user_exists($value)) {
-			$value = uniqid('MLS', true);
+			$value = uniqid('', true);
 		}
 		
 		$db->add_user($value);

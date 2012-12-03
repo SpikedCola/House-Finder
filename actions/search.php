@@ -72,10 +72,26 @@
 
 	echo json_encode($ret);
 	
+        /**
+         * This takes the raw JSON object from MLS and converts it into something
+         * we can pass back to our page. We also need to check if any of the IDs
+         * in the response are being ignored by the user.
+         * 
+         * @param Object $results The JSON object to parse
+         * @return array An array of listings
+         */
         function processResults($results) {
+                global $db;
                 $ret = array();
                 
+                $ignored = $db->getIgnoredListings($_COOKIE['uniqueId']);
+
                 foreach ($results as $result) {
+                        // skip the result if we're ignoring it
+                        if (array_key_exists($result->MLS, $ignored)) {
+                                continue;
+                        }
+                        
                         $imageUrl = str_replace('lowres', 'highres', $result->PropertyLowResImagePath);
 
                         $listing = array(
