@@ -7,6 +7,8 @@
         <LatitudeMin>43.5308780810838</LatitudeMin>
         <LeaseRentMax>1400</LeaseRentMax>
         <LeaseRentMin>700</LeaseRentMin>
+       <!-- <PriceMax>1400</PriceMax>
+        <PriceMin>700</PriceMin>-->
         <LongitudeMax>-79.52779769897461</LongitudeMax>
         <LongitudeMin>-79.7047805786133</LongitudeMin>
         <PropertyTypeID>300</PropertyTypeID>

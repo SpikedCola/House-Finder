@@ -1,0 +1,125 @@
+
+// Javascript version of the BOL.ListingSearchMap object
+function newListingSearchMap(){
+    objSearch = new Object()
+    // function to build XML version of ListingSearchMap object
+    objSearch.BuildXML = function() {
+    var strData = "<ListingSearchMap>"
+
+        if (this.NumberOfDays != null && this.NumberOfDays != '') strData += "<NumberOfDays>" + this.NumberOfDays + "</NumberOfDays>"
+        if (this.LoadFullDetails != null && this.LoadFullDetails != '') strData += "<LoadFullDetails>" + this.LoadFullDetails + "</LoadFullDetails>"
+        if (this.Culture != null && this.Culture != '') strData += "<Culture>" + this.Culture + "</Culture>"
+        if (this.OrderBy != null && this.OrderBy != '') strData += "<OrderBy>" + this.OrderBy + "</OrderBy>"
+        if (this.OrderDirection != null && this.OrderDirection != '') strData += "<OrderDirection>" + this.OrderDirection + "</OrderDirection>"
+        if (this.UtilitiesGroupIDs != null && this.UtilitiesGroupIDs != '') strData += "<UtilitiesGroupIDs>" + this.UtilitiesGroupIDs + "</UtilitiesGroupIDs>"
+        if (this.BuildingAmenityTypeIDs != null && this.BuildingAmenityTypeIDs != '') strData += "<BuildingAmenityTypeIDs>" + this.BuildingAmenityTypeIDs + "</BuildingAmenityTypeIDs>"
+        if (this.LoadingTypeIDs != null && this.LoadingTypeIDs != '') strData += "<LoadingTypeIDs>" + this.LoadingTypeIDs + "</LoadingTypeIDs>"
+        if (this.WithProperty != null && this.WithProperty != '') strData += "<WithProperty>" + this.WithProperty + "</WithProperty>"
+        if (this.CommunicationTypeIDs != null && this.CommunicationTypeIDs !='') strData += "<CommunicationTypeIDs>" + this.CommunicationTypeIDs + "</CommunicationTypeIDs>"
+        if (this.BusinessTypeIDs != null && this.BusinessTypeIDs !='') strData += "<BusinessTypeIDs>" + this.BusinessTypeIDs + "</BusinessTypeIDs>"
+        if (this.BusinessSubTypeIDs != null && this.BusinessSubTypeIDs !='') strData += "<BusinessSubTypeIDs>" + this.BusinessSubTypeIDs + "</BusinessSubTypeIDs>"
+        if (this.PropertyFeatureIDs != null && this.PropertyFeatureIDs !='') strData += "<PropertyFeatureIDs>" + this.PropertyFeatureIDs + "</PropertyFeatureIDs>"
+        if (this.AmenitityTypeIDs != null && this.AmenitityTypeIDs !='') strData += "<AmenitityTypeIDs>" + this.AmenitityTypeIDs + "</AmenitityTypeIDs>"
+        if (this.ClassificationTypeIds != null && this.ClassificationTypeIds !='') strData += "<ClassificationTypeIds>" + this.ClassificationTypeIds + "</ClassificationTypeIds>"
+        if (this.ZoningTypeGroupIds != null && this.ZoningTypeGroupIds !='') strData += "<ZoningTypeGroupIds>" + this.ZoningTypeGroupIds + "</ZoningTypeGroupIds>"
+        if (this.Acreage != null && this.Acreage !='') strData += "<Acreage>" + this.Acreage + "</Acreage>"
+        if (this.AirCondition != null && this.AirCondition !='') strData += "<AirCondition>" + this.AirCondition + "</AirCondition>"
+        if (this.BuildingStyleID != null && this.BuildingStyleID != '') strData += "<ConstructionStyleAttachmentID>" + this.BuildingStyleID + "</ConstructionStyleAttachmentID>"
+        if (this.BuildingTypeIDs != null && this.BuildingTypeIDs !='') strData += "<BuildingTypeIDs>" + this.BuildingTypeIDs + "</BuildingTypeIDs>"
+        if (this.CropTypeID != null && this.CropTypeID !='') strData += "<CropTypeID>" + this.CropTypeID + "</CropTypeID>"
+        if (this.Culture != null && this.Culture != '') strData += "<Culture>" + this.Culture + "</Culture>"
+        if (this.FarmTypeID != null && this.FarmTypeID !='') strData += "<FarmTypeID>" + this.FarmTypeID + "</FarmTypeID>"
+        if (this.Fireplace != null && this.Fireplace != '') strData += "<Fireplace>" + this.Fireplace + "</Fireplace>"
+        if (this.Garage != null && this.Garage != '') strData += "<Garage>" + this.Garage + "</Garage>"
+        if (this.IXN != null && this.IXN != '') strData += "<IXN>" + this.IXN + "</IXN>"
+        if (this.LandUseID != null && this.LandUseID != '') strData += "<LandUseID>" + this.LandUseID + "</LandUseID>"
+        if (this.LatitudeMax != null && this.LatitudeMax != '') strData += "<LatitudeMax>" + this.LatitudeMax + "</LatitudeMax>"
+        if (this.LatitudeMin != null && this.LatitudeMin != '') strData += "<LatitudeMin>" + this.LatitudeMin + "</LatitudeMin>"
+        if (this.LeaseRentMax != null && this.LeaseRentMax != '') strData += "<LeaseRentMax>" + this.LeaseRentMax + "</LeaseRentMax>"
+        if (this.LeaseRentMin != null && this.LeaseRentMin != '') strData += "<LeaseRentMin>" + this.LeaseRentMin + "</LeaseRentMin>"
+        if (this.ListingTypeID != null &&  this.ListingTypeID != '') strData += "<ListingTypeID>" + this.ListingTypeID + "</ListingTypeID>"
+        if (this.LivestockTypeID != null && this.LivestockTypeID != '') strData += "<LivestockTypeID>" + this.LivestockTypeID + "</LivestockTypeID>"
+        if (this.LongitudeMax != null && this.LongitudeMax != '') strData += "<LongitudeMax>" + this.LongitudeMax + "</LongitudeMax>"
+        if (this.LongitudeMin != null && this.LongitudeMin != '') strData += "<LongitudeMin>" + this.LongitudeMin + "</LongitudeMin>"
+        if (this.MaximumDetails != null && this.MaximumDetails != '') strData += "<MaximumDetails>" + this.MaximumDetails + "</MaximumDetails>"
+        if (this.OpenHouse != null && this.OpenHouse != '') strData += "<OpenHouse>" + this.OpenHouse + "</OpenHouse>"
+        if (this.OpenHouseEndDate != null && this.OpenHouseEndDate !='') strData += "<OpenHouseEndDate>" + this.OpenHouseEndDate + "</OpenHouseEndDate>"
+        if (this.OpenHouseStartDate != null && this.OpenHouseStartDate!='') strData += "<OpenHouseStartDate>" + this.OpenHouseStartDate + "</OpenHouseStartDate>"
+        if (this.OwnershipTypeGroupID != null && this.OwnershipTypeGroupID != '') strData += "<OwnershipTypeGroupID>" + this.OwnershipTypeGroupID + "</OwnershipTypeGroupID>"
+        if (this.ParkingTypeIDs != null && this.ParkingTypeIDs != '') strData += "<ParkingTypeIDs>" + this.ParkingTypeIDs + "</ParkingTypeIDs>"
+        if (this.PermitShowPublicICX != null && this.PermitShowPublicICX != '') strData += "<PermitShowPublicICX>" + this.PermitShowPublicICX + "</PermitShowPublicICX>"
+        if (this.PermitShowPublicICXConsole != null && this.PermitShowPublicICXConsole != '') strData += "<PermitShowPublicICXConsole>" + this.PermitShowPublicICXConsole + "</PermitShowPublicICXConsole>"
+        if (this.PropertyFeatureIDs != null && this.PropertyFeatureIDs != '') strData += "<PropertyFeatureIDs>" + this.PropertyFeatureIDs + "</PropertyFeatureIDs>"
+        if (this.Pool != null && this.Pool != '') strData += "<Pool>" + this.Pool + "</Pool>"
+        if (this.PriceMax != null && this.PriceMax != '') strData += "<PriceMax>" + this.PriceMax + "</PriceMax>"
+        if (this.PriceMin != null) strData += "<PriceMin>" + this.PriceMin + "</PriceMin>"
+        if (this.PropertyTypeGroupID != null && this.PropertyTypeGroupID != '') strData += "<PropertyTypeGroupID>" + this.PropertyTypeGroupID + "</PropertyTypeGroupID>"
+        if (this.PropertyTypeID != null && this.PropertyTypeID != '') strData += "<PropertyTypeID>" + this.PropertyTypeID + "</PropertyTypeID>"
+        if (this.StatusID != null && this.StatusID != '') strData += "<StatusID>" + this.StatusID + "</StatusID>"
+        if (this.TransactionTypeID != null && this.TransactionTypeID != '') strData += "<TransactionTypeID>" + this.TransactionTypeID + "</TransactionTypeID>"
+        if (this.ViewTypeID != null && this.ViewTypeID != '') strData += "<ViewTypeGroupIDs>" + this.ViewTypeID + "</ViewTypeGroupIDs>"
+        if (this.Waterfront != null && this.Waterfront != '') strData += "<Waterfront>" + this.Waterfront + "</Waterfront>"
+        if (this.BathSelected != null && this.BathSelected != ''){
+            var Bath_Array = new Array();
+            Bath_Array = this.BathSelected.split("-");
+            strData += "<MinBath>" + Bath_Array[0] + "</MinBath>"
+            strData += "<MaxBath>" + Bath_Array[1] + "</MaxBath>"
+        }
+        if (this.BedSelected != null && this.BedSelected != ''){
+            var Bed_Array = new Array();
+            Bed_Array = this.BedSelected.split("-");
+            strData += "<MinBed>" + Bed_Array[0] + "</MinBed>"
+            strData += "<MaxBed>" + Bed_Array[1] + "</MaxBed>"
+        }
+        if (this.StoriesSelected != null && this.StoriesSelected != ''){ 
+            var Stories_Array = new Array();
+            Stories_Array = this.StoriesSelected.split("-");
+            strData += "<StoriesTotalMin>" + Stories_Array[0] + "</StoriesTotalMin>"
+            strData += "<StoriesTotalMax>" + Stories_Array[1] + "</StoriesTotalMax>"
+        }
+        if (this.LandSelected != null && this.LandSelected != ''){ 
+            var Land_Array = new Array();
+            Land_Array = this.LandSelected.split("-");
+            strData += "<LandSizeMin>" + Land_Array[0] + "</LandSizeMin>"
+            strData += "<LandSizeMax>" + Land_Array[1] + "</LandSizeMax>"
+        }
+        if (this.ParkingSpacesSelected != null && this.ParkingSpacesSelected != ''){
+            var ParkingSpaces_Array = new Array();
+            ParkingSpaces_Array = this.ParkingSpacesSelected.split("-");
+            strData += "<ParkingSpacesMin>" + ParkingSpaces_Array[0] + "</ParkingSpacesMin>"
+            strData += "<ParkingSpacesMax>" + ParkingSpaces_Array[1] + "</ParkingSpacesMax>"
+        }
+         if (this.UnitsSelected != null && this.UnitsSelected != ''){
+            var Units_Array = new Array();
+            Units_Array = this.UnitsSelected.split("-");
+            strData += "<UnitsMin>" + Units_Array[0] + "</UnitsMin>"
+            strData += "<UnitsMax>" + Units_Array[1] + "</UnitsMax>"
+        }
+          if (this.CeilingHeightSelected != null && this.CeilingHeightSelected != ''){
+            var Ceiling_Array = new Array();
+            Ceiling_Array = this.CeilingHeightSelected.split("-");
+            strData += "<CeilingHeightMin>" + Ceiling_Array[0] + "</CeilingHeightMin>"
+            strData += "<CeilingHeightMax>" + Ceiling_Array[1] + "</CeilingHeightMax>"      
+        }
+        
+          if (this.BuildingSizeSelected != null && this.BuildingSizeSelected != ''){
+            var BuildingSize_Array = new Array();
+            BuildingSize_Array = this.BuildingSizeSelected.split("-");
+            strData += "<BuildingSizeMin>" + BuildingSize_Array[0] + "</BuildingSizeMin>"
+            strData += "<BuildingSizeMax>" + BuildingSize_Array[1] + "</BuildingSizeMax>"      
+        }
+        
+          if (this.FloorSpaceSelected != null && this.FloorSpaceSelected != ''){
+            var FloorSpace_Array = new Array();
+            FloorSpace_Array  = this.FloorSpaceSelected.split("-");
+            strData += "<FloorSpaceMin>" + FloorSpace_Array[0] + "</FloorSpaceMin>"
+            strData += "<FloorSpaceMax>" + FloorSpace_Array[1] + "</FloorSpaceMax>"      
+        }      
+        
+        
+        strData +=  "</ListingSearchMap>";
+        return strData;
+    }
+    
+    return objSearch
+}

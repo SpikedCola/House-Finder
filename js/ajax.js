@@ -5,10 +5,10 @@ function doSearch() {
         // get the rectangle's bounds
         var bounds = rectangle.getBounds();
         $.ajax({
-                url: 'receiver.php',
+                url: '/ajax/search.php',
                 type: 'post',
                 dataType: 'json',
-                data: { action: 'search', location: bounds.toUrlValue(10) }, // thanks google!
+                data: { location: bounds.toUrlValue(10) }, // thanks google!
                 success: function(data) {
 			clearMarkers();
                         clearListings();
@@ -43,12 +43,12 @@ function doSearch() {
 
 function hideListing(id, listing) {
         $.ajax({
-                url: 'receiver.php',
+                url: '/ajax/ignore.php',
                 type: 'post',
                 dataType: 'json',
-                data: { action: 'ignore', id: listing }, 
+                data: { id: listing }, 
                 success: function() {
-			// strike out the line
+			// strike out the row
 			var row = $("#listings-table tbody tr").eq(id);
 			row.find('td').not('.nofade').animate({ opacity: 0.25 }, 400, 'easeOutQuad', function() {
 				row.find('.remove-link').hide();
@@ -66,10 +66,10 @@ function hideListing(id, listing) {
 
 function undoHideListing(id, listing) {
         $.ajax({
-                url: 'receiver.php',
+                url: '/ajax/ignore.php',
                 type: 'post',
                 dataType: 'json',
-                data: { action: 'ignore', undo: true, id: listing }, 
+                data: { undo: true, id: listing }, 
                 success: function() {
 			// strike out the line
 			var row = $("#listings-table tbody tr").eq(id);
@@ -87,32 +87,38 @@ function undoHideListing(id, listing) {
 }
 
 function saveOptions() {
-	var user_id = readCookie('uniqueId');
 	var type = $("input[name='for']:checked").val();
 	var minPrice = parseInt($("#min-price").val(), 10);
 	var maxPrice = parseInt($("#max-price").val(), 10);
-	var photo = $("#photo").attr('checked') == 'checked' ? true : false;
-	var address = $("#address").attr('checked') == 'checked' ? true : false;
+	var photos = $("#photo").attr('checked') == 'checked';
+	var address = $("#address").attr('checked') == 'checked';
 	
         $.ajax({
-                url: 'receiver.php',
+                url: '/ajax/save_options.php',
                 type: 'post',
                 dataType: 'json',
                 data: { 
-			action: 'save',
 			type: type,
 			minPrice: minPrice,
 			maxPrice: maxPrice,
-			photo: photo,
-			address: address 
+			photos: photos,
+			address: address
 		}, 
-                success: function() {
-			$("#spinner").hide();
-			$("#check").show();
-			$("#options-container").delay(1000).slideUp(700, function() {
-				$("#check").hide();
+                success: function(data) {
+			if (data.error) {
+				$("#spinner").hide();
 				$("#save-button").show();
-			});
+				alert(data.error);
+			}
+			else {
+				$("#spinner").hide();
+				$("#check").show();
+				doSearch(); // refresh listings after updating settings
+				$("#options-container").delay(500).slideUp(700, function() {
+					$("#check").hide();
+					$("#save-button").show();
+				});
+			}
                 },
                 error: function() {
 			$("#spinner").hide();

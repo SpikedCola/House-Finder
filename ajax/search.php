@@ -1,4 +1,6 @@
 <?php
+	require_once(__DIR__.'/../inc.php');
+
 	// Returns a string of the form "lat_lo,lng_lo,lat_hi,lng_hi" for this bounds, 
 	// where "lo" corresponds to the SW of the bounding box and
 	// "hi" corresponds to the NE corner of the box.
@@ -8,7 +10,11 @@
 	    'status' => 'error',
 	    'results' => array()
 	);
-
+/*
+	$user->search_type;
+	$user->min_price;
+	$user->max_price;
+*/
 	$xmlFile = __DIR__ . '/../request.xml';
 	$xml = simplexml_load_file($xmlFile);
 
@@ -81,14 +87,18 @@
          * @return array An array of listings
          */
         function processResults($results) {
-                global $db;
+                global $db, $user;
                 $ret = array();
-                
-                $ignored = $db->getIgnoredListings($_COOKIE['uniqueId']);
+		
+		$q = new Query();
+		$q->addTable('ignored_listings');
+		$q->addWhere('user_id', $user->user_id);
+                $q->addColumn('listing_id');
+		$ignored = $db->getAssoc($q, 'listing_id', 'listing_id');
 
                 foreach ($results as $result) {
                         // skip the result if we're ignoring it
-                        if (array_key_exists($result->MLS, $ignored)) {
+                        if (isset($ignored[$result->MLS])) {
                                 continue;
                         }
                         
@@ -157,6 +167,18 @@
                                 }
                         }
         
+			if ($user->photos && !$listing['photos']) {
+				// skip this listing if the user only 
+				// wants listings with photos
+				continue;
+			}
+			
+			if ($user->address && !$listing['address']) {
+				// skip this listing if the user only 
+				// wants listings with an address
+				continue;
+			}	
+			
                         $listing['bedrooms']['total'] = $listing['bedrooms']['above'] + $listing['bedrooms']['below'];
                         
                         ksort($listing); // for consistency
