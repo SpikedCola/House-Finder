@@ -20,13 +20,11 @@ $(function() {
 	// show/hide options container
         $("#config-button").on('click', function(e) {
                 e.preventDefault();
-                
-		if ($("#options-container").is(':visible')) {
-                        $("#options-container").slideUp(1000, 'easeOutQuad');
-                }
-                else {
-                        $("#options-container").slideDown(1000, 'easeOutQuad');
-                }
+                $.fancybox({
+			type: 'inline',
+			content: $("#options-container"),
+			autoSize: true
+		});
 	});
 
 	// hide the options container if the user clicks the outside it
@@ -39,8 +37,6 @@ $(function() {
 	// save options button
 	$("#save-button").on('click', function(e) {
 		e.preventDefault();
-		$(this).hide();
-		$("#spinner").show();
 		saveOptions();
 	});
 

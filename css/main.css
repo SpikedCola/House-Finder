@@ -108,16 +108,7 @@ body {
 
 /* Options Container */
 #options-container {
-	border: 1px solid black;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
-	border-radius: 10px;
-	position: absolute;
-	left: 43%;
-	background: white;
-	padding: 10px;
 	width: 250px;
-	margin-top: 25px;
 	display: none;
 }
 

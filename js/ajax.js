@@ -106,23 +106,14 @@ function saveOptions() {
 		}, 
                 success: function(data) {
 			if (data.error) {
-				$("#spinner").hide();
-				$("#save-button").show();
 				alert(data.error);
 			}
 			else {
-				$("#spinner").hide();
-				$("#check").show();
 				doSearch(); // refresh listings after updating settings
-				$("#options-container").delay(500).slideUp(700, function() {
-					$("#check").hide();
-					$("#save-button").show();
-				});
+				$.fancybox.close();
 			}
                 },
                 error: function() {
-			$("#spinner").hide();
-			$("#save-button").show();
                         showSaveOptionsError(); 
                 }
         });

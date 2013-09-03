@@ -1,5 +1,6 @@
 <html>
         <head>
+		<title>MLS Listing Search</title>
 		<!-- Pretty font -->
 		<link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
 		<!-- Google Maps -->

@@ -2,7 +2,7 @@
 <table id="optionsTable">
 	<tbody>
 		<tr>
-			<td style="vertical-align: top; padding-top: 1px;">For:</td>
+			<td style="vertical-align: top; padding-top: 1px;">Show Properties For</td>
 			<td>
 				<label><input type="radio" name="for" value="rent" {if $user->search_type == 'rent'}checked="checked"{/if} />Rent</label><br />
 				<label><input type="radio" name="for" value="sale" {if $user->search_type == 'sale'}checked="checked"{/if} />Sale</label>
@@ -11,11 +11,11 @@
 		<tr><td colspan="2">&nbsp;</td></tr>
 		<tr>
 			<td><label for="min-price">Min. Price:</label></td>
-			<td><input id="min-price" class="price-textbox" maxlength="7" name="min-price" value="{{$user->min_price|default:0}}" /></td>
+			<td><input id="min-price" class="price-textbox" name="min-price" type="number" min="0" max="99999999" value="{{$user->min_price|default:0}}" /></td>
 		</tr>	
 		<tr>
 			<td><label for="max-price">Max. Price:</label></td>
-			<td><input id="max-price" class="price-textbox" maxlength="7" name="max-price" value="{{$user->max_price|default:2000}}" /></td>
+			<td><input id="max-price" class="price-textbox" name="max-price" type="number" min="0" max="99999999" value="{{$user->max_price|default:2000}}" /></td>
 		</tr>
 	</tbody>
 	<tfoot>
