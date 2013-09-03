@@ -1,3 +1,8 @@
+--
+-- Database: `mls`
+--
+CREATE DATABASE IF NOT EXISTS `mls` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `mls`;
 
 -- --------------------------------------------------------
 
@@ -6,12 +11,11 @@
 --
 
 CREATE TABLE IF NOT EXISTS `ignored_listings` (
-  `id` int(20) unsigned NOT NULL AUTO_INCREMENT,
+  `listing_id` char(10) NOT NULL,
   `user_id` char(23) NOT NULL,
-  `listing_id` varchar(20) NOT NULL,
-  `date` int(12) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
+  `timestamp` int(12) unsigned NOT NULL,
+  UNIQUE KEY `listing_id` (`listing_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
