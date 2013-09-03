@@ -27,13 +27,6 @@ $(function() {
 		});
 	});
 
-	// hide the options container if the user clicks the outside it
-	$("#body-container").on('click', function(e) {
-		if ($("#options-container").is(":visible")) {
-                        $("#options-container").slideUp(700, 'easeOutQuad');
-		}
-	});
-
 	// save options button
 	$("#save-button").on('click', function(e) {
 		e.preventDefault();
