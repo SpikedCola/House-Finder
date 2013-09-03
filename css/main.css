@@ -126,7 +126,7 @@ body {
 	padding-top: 5px;
 }
 
-#config-table tbody td:first-child {
+#optionsTable tbody td:first-child {
 	text-align: right;
 }
 

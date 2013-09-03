@@ -14,11 +14,7 @@
 	<h1>MLS Listing Search</h1>
 	Welcome! This tool will help you find MLS listings in exactly the area you want.
 	<br />
-	<div id="tips"{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')} style="display: none;"{/if}>
-		{include file="tips.tpl"}	
-	</div>
-	<br />
-	<div id="hide-tips">(<a id="hide-button" href="#">{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')}Show{else}Hide{/if} Getting Started</a>)</div>
+	{include file="tips.tpl"}
 	<div id="listings-container">
 		<table id="listings-table">
 			<thead>
@@ -33,9 +29,7 @@
 					<th></th>
 				</tr>
 			</thead>
-			<tbody>
-				<!-- Listings go here :) -->
-			</tbody>
+			<tbody><!-- Listings go here :) --></tbody>
 		</table>
 	</div>
 </div>

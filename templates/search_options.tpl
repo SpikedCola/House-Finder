@@ -1,5 +1,5 @@
 <h2>Search Options</h2>
-<table id="config-table">
+<table id="optionsTable">
 	<tbody>
 		<tr>
 			<td style="vertical-align: top; padding-top: 1px;">For:</td>
