@@ -4,7 +4,7 @@
 		<!-- Pretty font -->
 		<link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
 		<!-- Google Maps -->
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIeGZ0goJKoy7ixt2ARwaGt6VBJyUXY1I&sensor=false"></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIeGZ0goJKoy7ixt2ARwaGt6VBJyUXY1I&sensor=false&libraries=drawing"></script>
 		<!-- Libraries -->
 		<script src="js/libraries/jquery-1.8.3.min.js"></script>
 		<script src="js/libraries/jquery-ui-1.9.2.custom.min.js"></script>
