@@ -122,8 +122,11 @@ body {
 }
 
 .price-textbox {
+	width: 80px;
+}
+
+.lot-size-textbox {
 	width: 60px;
-	text-align: center;
 }
 
 #save-button {

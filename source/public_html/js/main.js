@@ -56,18 +56,16 @@ $(function() {
         // and possibly max out its z-index so we can see it if there
         // are multiple markers on one spot
         $("#listings-table tbody tr").live('mouseenter', function() {
-                var td = $(this).find(".id");
-                var id = parseInt(td.text(), 10);
-                var marker = markers[id - 1];
+                var id = parseInt($(this).data('id'), 10);
+                var marker = markers[id];
                 marker.setIcon('images/blue.png');
                 marker.setZIndex(1000);
                 $(this).addClass('hover');
         });
 
         $("#listings-table tbody tr").live('mouseleave', function() {
-                var td = $(this).find(".id");
-                var id = parseInt(td.text(), 10);
-                var marker = markers[id - 1];
+                var id = parseInt($(this).data('id'), 10);
+                var marker = markers[id];
                 marker.setIcon('images/red.png');
                 marker.setZIndex(id - 1);
                 $(this).removeClass('hover');

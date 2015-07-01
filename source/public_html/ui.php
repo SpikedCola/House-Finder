@@ -5,7 +5,7 @@
  */
 require_once(__DIR__.'/inc.php');
 
-global $template, $user;
+global $template;
 
 $template = new Template();
 $template->wrapper = 'wrapper.tpl';
