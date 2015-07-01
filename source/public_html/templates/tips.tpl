@@ -1,4 +1,7 @@
 <div id="tips"{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')} style="display: none;"{/if}>
+	<h1>House Finder</h1>
+	Welcome! This tool will help you find a house, in exactly the area you want, meeting your exact criteria (if such a house exists!)
+	<br />
 	<h2>Getting started</h2>
 	<ul id="tips-list">
 		<li>Adjust the rectangle on the map above to cover your desired living area.</li>
@@ -17,5 +20,4 @@
 		<li>Results you've chosen to hide will be removed from the list when you change the search area or refresh the page.</li>
 	</ul>
 </div>
-<br />
 <div id="hide-tips">(<a id="hide-button" href="#">{if isset($smarty.cookies.showGettingStarted) && ($smarty.cookies.showGettingStarted == 'false')}Show{else}Hide{/if} Getting Started</a>)</div>	

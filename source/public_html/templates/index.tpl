@@ -11,9 +11,6 @@
 	{include file="search_options.tpl"}		
 </div>
 <div id="body-container">
-	<h1>House Finder</h1>
-	Welcome! This tool will help you find a house, in exactly the area you want, meeting your exact criteria (if such a house exists!)
-	<br />
 	{include file="tips.tpl"}
 	<div id="listings-container">
 		<table id="listings-table">
