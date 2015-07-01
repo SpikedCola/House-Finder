@@ -41,19 +41,32 @@ function doSearch() {
         });
 }
 
-function hideListing(id, listing) {
+function parseId(id) {
+	var text = atob(id).split('|');
+	return {
+		provider: text[0],
+		id: text[1],
+		markerId: text[2]
+	};
+}
+
+function hideListing(encodedId) {
+	var id = parseId(encodedId);
         $.ajax({
                 url: '/ajax/ignore.php',
                 type: 'post',
                 dataType: 'json',
-                data: { id: listing }, 
+                data: { 
+			provider: id.provider,
+			id: id.id
+		}, 
                 success: function() {
 			// strike out the row
-			var row = $("#listings-table tbody tr").eq(id);
+			var row = $("#listings-table tbody tr[data-id='"+encodedId+"']");
 			row.find('td').not('.nofade').animate({ opacity: 0.25 }, 400, 'easeOutQuad', function() {
 				row.find('.remove-link').hide();
 				row.find('.undo-link').show();
-				markers[id].setMap(null);
+				markers[id.markerId].setMap(null);
 				row.css('text-decoration', 'line-through');
 			});
                 },
@@ -64,20 +77,25 @@ function hideListing(id, listing) {
 }
 
 
-function undoHideListing(id, listing) {
+function undoHideListing(encodedId) {
+	var id = parseId(encodedId);
         $.ajax({
                 url: '/ajax/ignore.php',
                 type: 'post',
                 dataType: 'json',
-                data: { undo: true, id: listing }, 
+                data: { 
+			undo: true,
+			provider: id.provider,
+			id: id.id 
+		}, 
                 success: function() {
 			// strike out the line
-			var row = $("#listings-table tbody tr").eq(id);
+			var row = $("#listings-table tbody tr[data-id='"+encodedId+"']");
 			row.css('text-decoration', 'none');
 			row.find('.undo-link').hide();
 			row.find('.remove-link').show();
 			row.find('td').not('.nofade').animate({ opacity: 1 }, 400, 'easeOutQuad', function() {
-				markers[id].setMap(map);
+				markers[id.markerId].setMap(map);
 			});
                 },
                 error: function() {

@@ -2,10 +2,11 @@
 
 require_once(__DIR__.'/../inc.php');
 
-if ($id = POST('id')) {
+if (($id = POST('id')) && ($provider = POST('provider'))) {
 	$data = [
 	    'user_id' => $user->id,
-	    'listing_id' => $id
+	    'listing_id' => $id,
+	    'provider' => $provider
 	];
 	$q = new Query();
 	$q->addTable('ignored_listings');

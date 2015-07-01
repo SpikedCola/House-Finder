@@ -34,7 +34,7 @@ $(function() {
 	});
 
 	// hide/show tips link
-	$("#hide-tips").on('click', function(e) {
+	$("#hide-button").on('click', function(e) {
 		e.preventDefault();
 		
 		if ($("#tips").is(':visible')) {
@@ -56,7 +56,7 @@ $(function() {
         // and possibly max out its z-index so we can see it if there
         // are multiple markers on one spot
         $("#listings-table tbody tr").live('mouseenter', function() {
-                var id = parseInt($(this).data('id'), 10);
+                var id = parseInt($(this).data('marker-id'), 10);
                 var marker = markers[id];
                 marker.setIcon('images/blue.png');
                 marker.setZIndex(1000);
@@ -64,7 +64,7 @@ $(function() {
         });
 
         $("#listings-table tbody tr").live('mouseleave', function() {
-                var id = parseInt($(this).data('id'), 10);
+                var id = parseInt($(this).data('marker-id'), 10);
                 var marker = markers[id];
                 marker.setIcon('images/red.png');
                 marker.setZIndex(id - 1);

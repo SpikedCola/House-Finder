@@ -13,16 +13,22 @@ $listingProviders = [
 // i think this is a bounding box that gets sent back
 $location = POST('location');
 
-$listings = [];
+$resultCount = 0;
+$results = [];
 foreach ($listingProviders as $provider) {
-	$name = $provider->getNiceName();
-	$provider->setLocation($location);
-	$listings[] = $provider->getListings();
+	$listings = $provider->getListings($location);
+	$resultCount += count($listings);
+	$results[] = [
+	    'name' => $provider->getNiceName(),
+	    'listings' => $listings
+	];
 }
 
-$response = [];
-$response['status'] = 'ok';
-$response['listings'] = $listings;
+$response = [
+    'status' => 'ok',
+    'resultCount' => $resultCount,
+    'results' => $results
+];
 
 echo json_encode($response);
 

@@ -11,6 +11,8 @@ class listing {
 	
 	public $MLSnumber = 0;
 	
+	public $MLSlink = null;
+	
 	public $id = 0;
 	
 	public $bedrooms = 0;

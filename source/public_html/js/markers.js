@@ -22,26 +22,28 @@ function addMarker(latitude, longitude) {
         google.maps.event.addListener(marker, "click", clickMarker);
 	
         markers.push(marker); // add marker to list so we can remove it later
-
+	
+	// return position in the list so we can attach it to the row
+	return markers.indexOf(marker);
 }
 
 function mouseEnteredMarker() {
         this.setIcon('images/blue.png');
         var id = parseInt(markers.indexOf(this), 10);
         markers[id].setZIndex(1000);
-        $('#listings-table tbody tr').eq(id).addClass('hover');
+        $('#listings-table tbody tr[data-marker-id="'+id+'"]').addClass('hover');
 }
 
 function mouseLeftMarker() {
         this.setIcon('images/red.png');
         var id = parseInt(markers.indexOf(this), 10);
         markers[id].setZIndex(id);
-        $('#listings-table tbody tr').eq(id).removeClass('hover');
+        $('#listings-table tbody tr[data-marker-id="'+id+'"]').removeClass('hover');
 }
 
 function clickMarker() {
         var id = parseInt(markers.indexOf(this), 10);
-	var row = $('#listings-table tbody tr').eq(id);	
+	var row = $('#listings-table tbody tr[data-marker-id="'+id+'"]');	
         google.maps.event.clearListeners(this, "mouseout");//, mouseLeftMarker);
 	$('html, body').stop().animate({
 		'scrollTop': row.offset().top
@@ -54,6 +56,6 @@ function clickMarker() {
 		row.animate({ 'background-color': color }).removeClass('hover');
 		google.maps.event.addListener(markers[id], "mouseout", mouseLeftMarker);
 		google.maps.event.trigger(markers[id], "mouseout");
-	}, 3000);
+	}, 4000);
 	
 }

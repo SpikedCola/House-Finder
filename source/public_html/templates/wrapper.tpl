@@ -1,6 +1,6 @@
 <html>
         <head>
-		<title>MLS Listing Search</title>
+		<title>House Finder</title>
 		<!-- Pretty font -->
 		<link href="http://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet">
 		<link href="css/libraries/ui-lightness/jquery-ui-1.9.2.custom.css" rel="stylesheet">
@@ -22,8 +22,6 @@
 		})();
                 {/literal}
 		</script>
-			
-			
 		<!-- Google Maps -->
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBIeGZ0goJKoy7ixt2ARwaGt6VBJyUXY1I&sensor=false"></script>
 		<!-- Libraries -->

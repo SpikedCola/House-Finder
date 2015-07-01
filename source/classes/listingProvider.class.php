@@ -17,22 +17,6 @@ abstract class listingProvider {
 		$this->user = $user;
 	}
 	
-	protected $location = [
-	    'LatitudeMax' => 0,
-	    'LatitudeMin' => 0,
-	    'LongitudeMax' => 0,
-	    'LongitudeMin' => 0
-	];
-	
-	/**
-	 * Sets the location to search within. Mandatory
-	 * 
-	 * @param string $location Google maps bounding box string
-	 */
-	public function setLocation($location) {
-		$this->location = $this->parseLocation($location);
-	}
-	
 	/**
 	 * Create a listing object from a provider's listing.
 	 * Provider-specific
@@ -44,9 +28,10 @@ abstract class listingProvider {
 	/**
 	 * Gets the listings for this provider and applies current filters to results before returning listings
 	 * 
+	 * @param string $location Google maps bounding box string
 	 * @return array<listing> An array of listing objects
 	 */
-	abstract public function getListings();
+	abstract public function getListings($location);
 	
 	/*
 	 * Gets the name of this provider
