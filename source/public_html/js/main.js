@@ -1,34 +1,5 @@
-$(function() {       
-	$.tablesorter.addParser({ 
-		// set a unique id 
-		id: 'dollars',		
-		type: 'numeric', // set type, either numeric or text 
-		is: function() { return false; }, // return false so parser is not auto-detected
-		format: function(s) { 
-		    // format your data for normalization 
-		    return s.replace('$', '').replace(/monthly/i,'').replace(',', ''); 
-		}
-	}); 
-	$.tablesorter.addParser({ 
-		// set a unique id 
-		id: 'photos', 
-		type: 'numeric', // set type, either numeric or text 
-		is: function() { return false; }, // return false so parser is not auto-detected
-		format: function(s) { 
-		    return s.replace(/ photo\(s\)/i,''); 
-		}
-	}); 
-	
-        $("#listings-table").tablesorter({
-		headers: { 
-			2: { 
-				sorter: 'dollars' 
-			},
-			6: {
-				sorter: 'photos'
-			}
-		} 
-        }); 
+$(function() {        
+        $("#listings-table").tablesorter(); 
         
         $("#map-button").on('click', function(e) {
                 e.preventDefault();
