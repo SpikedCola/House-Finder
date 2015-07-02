@@ -33,6 +33,13 @@
 				</tr>
 			</thead>
 			<tbody>
+				<tr id="loading-spinner">
+					<td colspan="14" style="padding-top: 100px;">
+						<img src="images/spinner.gif" /> 
+						<div style="display:inline-block; vertical-align: top; margin-left: 10px; padding-top:6px;">Searching for listings...</div>
+						
+					</td>
+				</tr>
 				<!-- Listings go here :) -->
 				<tr id="listing-row-template" style="display:none;">
 					<td>
